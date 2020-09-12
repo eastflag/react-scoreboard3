@@ -7,8 +7,7 @@ const Player = (props) => {
     <div className="player">
       <span className="player-name">
         <button className="remove-player" onClick={() => props.removePlayer(props.id)}>x</button>
-      </span>
-      <span className="player-name">
+        {props.children}
         {props.name}
       </span>
       <Counter score={props.score} id={props.id} changeScore={props.changeScore}></Counter>

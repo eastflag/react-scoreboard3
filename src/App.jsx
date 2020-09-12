@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import Header from "./components/Header";
-import Player from "./components/Player";
 import AddPlayerForm from "./components/AddPlayerForm";
 import _ from "lodash";
+import {CustomPlayer} from "./components/CustomPlayer";
 
 class App extends React.Component {
   state = {
@@ -14,6 +14,7 @@ class App extends React.Component {
       {name: 'PARK', score: 0, id: 4},
     ]
   };
+
   handleRemovePlayer = (id) => {
     this.setState(prevState => {
       return {
@@ -21,6 +22,7 @@ class App extends React.Component {
       }
     })
   }
+
   handleChangeScore = (id, delta) => {
     console.log('id: ' + id, 'delta: ' + delta);
     this.setState(prevState => {
@@ -33,6 +35,7 @@ class App extends React.Component {
       return { players }
     })
   }
+
   handleAddPlayer = (name) => {
     this.setState(prevState => {
       const players = [ ... prevState.players ];
@@ -45,18 +48,28 @@ class App extends React.Component {
       return { players };
     });
   };
+
+  getHighScore() {
+    const maxObject = _.maxBy(this.state.players, 'score');
+    const highScore = maxObject.score;
+    // 0은 디폴트이므로  0보다 클 경우만 highScore로 지정한다.
+    return highScore > 0 ? highScore : null;
+  }
+
   render() {
     return (
       <div className="scoreboard">
         <Header title="My scoreboard" players={this.state.players} />
 
         {/*Players List*/}
-        { this.state.players.map(item => <Player name={item.name}
-                                                 score={item.score}
-                                                 key={item.id.toString()}
-                                                 removePlayer={this.handleRemovePlayer}
-                                                 changeScore={this.handleChangeScore}
-                                                 id={item.id} />)
+        { this.state.players.map(item => <CustomPlayer key={item.id.toString()}
+                                           id={item.id}
+                                           name={item.name}
+                                           score={item.score}
+                                           isHighScore={item.score === this.getHighScore()}
+                                           removePlayer={this.handleRemovePlayer}
+                                           changeScore={this.handleChangeScore}
+                                         />)
         }
 
         <AddPlayerForm addPlayer={this.handleAddPlayer} />
