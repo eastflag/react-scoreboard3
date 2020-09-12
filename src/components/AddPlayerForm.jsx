@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 
 const AddPlayerForm = (props) => {
   const [value, setValue] = useState('');
 
-  let formRef = React.createRef();
-  let textRef = React.createRef();
+  let formRef = useRef();
+  let textRef = useRef();
 
   const handleValueChange = (e) => {
     setValue(e.target.value);
@@ -13,13 +13,10 @@ const AddPlayerForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const form = formRef.current; // form node
-    const player = textRef.current; // input node
+    console.log(formRef.current.checkValidity());
+    console.log(textRef.current.validity.valid);
 
-    console.log(form.checkValidity());
-    console.log(player.validity.valid);
-
-    if (!form.checkValidity()) {
+    if (!formRef.current.checkValidity()) {
       return;
     }
 

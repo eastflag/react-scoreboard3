@@ -1,21 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 const Stopwatch = (props) => {
   const [isRunning, setIsRunning] = useState(false);
   const [timer, setTimer] = useState(0);
 
-  let tickRef;
+  const refIsRunning = useRef(isRunning);
 
   const tick = () => {
-    console.log('tick: ', isRunning);
+    console.log('tick: ', isRunning, refIsRunning.current);
     // isRunning이 true이면 timer를 1씩 증가
-    if (isRunning) {
-      setTimer(timer + 1)
+    if (refIsRunning.current) {
+      setTimer(timer => timer + 1)
     }
   }
 
   const handleStopwatch = () => {
-    setIsRunning(!isRunning);
+    refIsRunning.current = !refIsRunning.current;
+    setIsRunning(refIsRunning.current);
   }
 
   const handleReset = () => {
@@ -23,7 +24,7 @@ const Stopwatch = (props) => {
   }
 
   useEffect(() => {
-    tickRef = setInterval(tick, 1000);
+    let tickRef = setInterval(tick, 1000);
     return () => {
       clearInterval(tickRef);
     }
