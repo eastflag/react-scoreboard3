@@ -48,7 +48,7 @@ const App = () => {
       />)
       }
 
-      <AddPlayerForm addPlayer={handleAddPlayer} />
+      <AddPlayerForm />
     </div>
   );
 }
