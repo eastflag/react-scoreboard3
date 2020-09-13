@@ -4,31 +4,20 @@ const Stopwatch = (props) => {
   const [isRunning, setIsRunning] = useState(false);
   const [timer, setTimer] = useState(0);
 
-  const refIsRunning = useRef(isRunning);
-
-  const tick = () => {
-    console.log('tick: ', isRunning, refIsRunning.current);
-    // isRunning이 true이면 timer를 1씩 증가
-    if (refIsRunning.current) {
-      setTimer(timer => timer + 1)
+  useInterval(() => {
+    // Your custom logic here
+    if (isRunning) {
+      setTimer(timer => timer + 1);
     }
-  }
+  }, 1000);
 
   const handleStopwatch = () => {
-    refIsRunning.current = !refIsRunning.current;
-    setIsRunning(refIsRunning.current);
+    setIsRunning(isRunning => !isRunning);
   }
 
   const handleReset = () => {
     setTimer(0);
   }
-
-  useEffect(() => {
-    let tickRef = setInterval(tick, 1000);
-    return () => {
-      clearInterval(tickRef);
-    }
-  }, []);
 
   return (
     <div className="stopwatch">
@@ -38,6 +27,26 @@ const Stopwatch = (props) => {
       <button onClick={handleReset}>Reset</button>
     </div>
   )
+}
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }
 
 export default Stopwatch;
