@@ -4,17 +4,13 @@ import Header from "./components/Header";
 import AddPlayerForm from "./components/AddPlayerForm";
 import _ from "lodash";
 import {CustomPlayer} from "./components/CustomPlayer";
+import {useSelector} from "react-redux";
 
 const App = () => {
-  const [players, setPlayers] = useState([
-    {name: 'LDK', score: 0, id: 1},
-    {name: 'HONG', score: 0, id: 2},
-    {name: 'KIM', score: 0, id: 3},
-    {name: 'PARK', score: 0, id: 4},
-  ]);
+  const players = useSelector(state => state.playerReducer.players);
 
   const  handleRemovePlayer = (id) => {
-    setPlayers(players.filter(item => item.id !== id));
+    // setPlayers(players.filter(item => item.id !== id));
   }
 
   const handleChangeScore = (id, delta) => {
@@ -24,7 +20,7 @@ const App = () => {
         player.score += delta;
       }
     });
-    setPlayers([ ...players ]);
+    // setPlayers([ ...players ]);
   }
 
   const handleAddPlayer = (name) => {
@@ -32,7 +28,7 @@ const App = () => {
     const maxId = maxObject.id + 1;
     console.log(maxId);
     players.unshift({id: maxId, name, score: 0});
-    setPlayers([ ...players ]);
+    // setPlayers([ ...players ]);
   };
 
   const getHighScore = () => {
