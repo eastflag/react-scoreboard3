@@ -9,24 +9,6 @@ import {useSelector} from "react-redux";
 const App = () => {
   const players = useSelector(state => state.playerReducer.players);
 
-  const handleChangeScore = (id, delta) => {
-    console.log('id: ' + id, 'delta: ' + delta);
-    players.forEach(player => {
-      if (player.id === id) {
-        player.score += delta;
-      }
-    });
-    // setPlayers([ ...players ]);
-  }
-
-  const handleAddPlayer = (name) => {
-    const maxObject = _.maxBy(players, 'id');
-    const maxId = maxObject.id + 1;
-    console.log(maxId);
-    players.unshift({id: maxId, name, score: 0});
-    // setPlayers([ ...players ]);
-  };
-
   const getHighScore = () => {
     const maxObject = _.maxBy(players, 'score');
     const highScore = maxObject.score;
@@ -44,7 +26,6 @@ const App = () => {
                                                      name={item.name}
                                                      score={item.score}
                                                      isHighScore={item.score === getHighScore()}
-                                                     changeScore={handleChangeScore}
       />)
       }
 

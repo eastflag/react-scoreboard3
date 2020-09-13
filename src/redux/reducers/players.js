@@ -1,4 +1,4 @@
-import {ADD_PLAYER, REMOVE_PLAYER} from "../actionTypes";
+import {ADD_PLAYER, CHANGE_SCORE, REMOVE_PLAYER} from "../actionTypes";
 import _ from "lodash";
 
 const playerInitialState = {
@@ -26,6 +26,17 @@ export const playerReducer = (state = playerInitialState, action) => {
       const maxObject = _.maxBy(players, 'id');
       const maxId = maxObject.id + 1;
       players.unshift({id: maxId, name: action.name, score: 0});
+      return {
+        ...state,
+        players
+      }
+    case CHANGE_SCORE:
+      players = [...state.players];
+      players.forEach(player => {
+        if (player.id === action.id) {
+          player.score += action.delta;
+        }
+      })
       return {
         ...state,
         players
