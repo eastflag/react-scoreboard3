@@ -9,10 +9,6 @@ import {useSelector} from "react-redux";
 const App = () => {
   const players = useSelector(state => state.playerReducer.players);
 
-  const  handleRemovePlayer = (id) => {
-    // setPlayers(players.filter(item => item.id !== id));
-  }
-
   const handleChangeScore = (id, delta) => {
     console.log('id: ' + id, 'delta: ' + delta);
     players.forEach(player => {
@@ -48,7 +44,6 @@ const App = () => {
                                                      name={item.name}
                                                      score={item.score}
                                                      isHighScore={item.score === getHighScore()}
-                                                     removePlayer={handleRemovePlayer}
                                                      changeScore={handleChangeScore}
       />)
       }

@@ -1,3 +1,5 @@
+import {REMOVE_PLAYER} from "../actionTypes";
+
 const playerInitialState = {
   players: [
     {name: 'LDK', score: 0, id: 1},
@@ -8,5 +10,17 @@ const playerInitialState = {
 }
 
 export const playerReducer = (state = playerInitialState, action) => {
-  return state;
+  let players;
+  switch (action.type) {
+    case REMOVE_PLAYER:
+      players = [...state.players];
+      let index = players.findIndex(player => player.id === action.id);
+      players.splice(index, 1)
+      return {
+        ...state,
+        players
+      }
+    default:
+      return state;
+  }
 }
