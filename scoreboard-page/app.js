@@ -10,15 +10,16 @@ const Header = (props) => {
   // destruct assignment
   const {title, totalPlayers} = props;
   return (
-    <header className="header">
+    <div className="header d-flex justify-content-between align-items-md-center p-2">
+      <span></span>
       <h1 className="h1">{title}</h1>
       <span className='stats'>Players: {totalPlayers}</span>
-    </header>
+    </div>
   );
 }
 
 const Player = (props) => (
-  <div className='player'>
+  <div className='player '>
     <span className='player-name'>
       <button className='remove-player'
               onClick={() => props.removePlayer(props.id)}>x</button>
@@ -87,7 +88,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='scoreboard'>
+      <div className="container p-3">
         <Header title='My Scoreboard' totalPlayers={11}/>
 
         {

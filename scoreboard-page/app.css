@@ -1,6 +1,19 @@
-/* ELEMENT STYLES -------------------- */
-
+/* user defined css */
 .header {
+  background-color: #733daa;
+  color: #ffffff;
+}
+
+.player {
+  font-size: 1.2em;
+  border-bottom: solid 2px #EEEEEE;
+  border-left: solid 2px #EEEEEE;
+  letter-spacing: 2px;
+}
+
+/*
+
+.header {qcccccccccccccccccc
   color: #FFF;
   padding: 5px 10px;
   text-align: center;
@@ -17,7 +30,7 @@
   font-weight: normal;
 }
 
-/* FORMS */
+!* FORMS *!
 
 .form {
   display: flex;
@@ -71,7 +84,7 @@
   color 0.2s ease;
 }
 
-/* ICONS */
+!* ICONS *!
 
 .svg {
   width: 28px;
@@ -90,7 +103,7 @@
   50% { transform: scale(1.4) rotate(-3deg); }
 }
 
-/* COMPONENT STYLES -------------------- */
+!* COMPONENT STYLES -------------------- *!
 
 .scoreboard {
   background: #fff;
@@ -264,3 +277,4 @@ input[type=submit]:hover {
   color: white;
   margin: 0;
 }
+*/
