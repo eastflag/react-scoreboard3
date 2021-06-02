@@ -19,11 +19,9 @@ const Header = (props) => {
 }
 
 const Player = (props) => (
-  <div className='player '>
-    <span className='player-name'>
-      <button className='remove-player'
+  <div className='player p-2'>
+    <button className='remove-player'
               onClick={() => props.removePlayer(props.id)}>x</button>
-    </span>
     <span className='player-name'>{props.name}</span>
     <Counter/>
   </div>
